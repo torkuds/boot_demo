@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.torkuds.boot_demo.mapper.NewsMapper">
+    <insert id="insertAll" parameterType="java.util.List">
+        INSERT INTO boot_news(id,title,create_date,author,pic_url) VALUES
+        <foreach collection="newsList" item="news" separator=",">
+            (#{news.id, jdbcType=INTEGER},#{news.title, jdbcType=VARCHAR}
+            ,#{news.create_date, jdbcType=VARCHAR},#{news.author, jdbcType=VARCHAR}
+            ,#{news.pic_url, jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+
+    <insert id="insert">
+        INSERT INTO boot_news(id,title,create_date,author,pic_url) VALUES
+            (#{news.id, jdbcType=INTEGER},#{news.title, jdbcType=VARCHAR}
+            ,#{news.create_date, jdbcType=VARCHAR},#{news.author, jdbcType=VARCHAR}
+            ,#{news.pic_url, jdbcType=VARCHAR})
+    </insert>
+
+    <select id="queryAll" resultType="com.torkuds.boot_demo.entity.News">
+        SELECT id,title,create_date,author,pic_url from boot_news
+    </select>
+
+</mapper>
